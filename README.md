@@ -1,2 +1,2 @@
-# mslearn-ai-vision.es-es
-Spanish repo for mslearn-ai-vision
+# mslearn-computer-vision
+Archivos de laboratorio para módulos de Visión de Azure AI 
