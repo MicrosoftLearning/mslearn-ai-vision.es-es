@@ -6,9 +6,9 @@ lab:
 
 # Detección y análisis de caras
 
-La capacidad de detectar y analizar caras de personas es una funcionalidad básica de la inteligencia artificial. En este ejercicio, explorará dos servicios de Azure AI que puede usar para trabajar con caras en imágenes: el servicio **Azure AI Vision** y el servicio **Face**.
+La capacidad de detectar y analizar caras de personas es una funcionalidad básica de la inteligencia artificial. En este ejercicio, explorarás dos servicios de Azure AI que puedes usar para trabajar con caras de imágenes: el servicio **Visión de Azure AI** y el servicio **Face**.
 
-> **Nota**: A partir del 21 de junio de 2022, las capacidades de los Servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Estas restricciones pueden afectar a este ejercicio de laboratorio. Estamos trabajando para solucionar esto, pero, mientras tanto, es posible que experimente algunos errores al realizar los pasos siguientes; es por ello que nos disculpamos. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
+> **Nota**: a partir del 21 de junio de 2022, las funcionalidades de servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Estas restricciones pueden afectar a este ejercicio de laboratorio. Estamos trabajando para solucionar esto, pero, mientras tanto, es posible que experimente algunos errores al realizar los pasos siguientes; es por ello que nos disculpamos. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
 
 ## Clonación del repositorio para este curso
 
@@ -23,10 +23,10 @@ Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 
 ## Aprovisionamiento de un recurso de Servicios de Azure AI
 
-Si aún no tiene uno en su suscripción, deberá aprovisionar un recurso de **Servicios de Azure AI**.
+Si aún no tienes uno en tu suscripción, deberás aprovisionar un recurso de **Servicios de Azure AI**.
 
 1. Inicie sesión en Azure Portal en `https://portal.azure.com` y regístrese con la cuenta de Microsoft asociada a su suscripción de Azure.
-2. En la barra de búsqueda superior, busque *Servicios de Azure AI*, seleccione **Servicios de Azure AI** y cree un recurso de cuenta de varios Servicios de Azure AI con la siguiente configuración:
+2. En la barra de búsqueda superior, busca *Servicios de Azure AI*, selecciona **Servicios de Azure AI** y crea un recurso de cuenta multiservicio de servicios de Azure AI con la siguiente configuración:
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *elija o cree un grupo de recursos (si usa una suscripción restringida, es posible que no tenga permiso para crear un nuevo grupo de recursos; use el proporcionado)*
     - **Región**: *elija cualquier región disponible*
@@ -36,184 +36,212 @@ Si aún no tiene uno en su suscripción, deberá aprovisionar un recurso de **Se
 4. Espere a que se complete la implementación y, a continuación, consulte los detalles.
 5. Cuando se haya implementado el recurso, vaya a él y vea su página **Claves y punto de conexión**. Necesitará el punto de conexión y una de las claves de esta página en el procedimiento siguiente.
 
-## Prepararse para usar el SDK de Visión de Azure AI
+## Preparación para el uso del SDK de Visión de Azure AI
 
-En este ejercicio, completará una aplicación cliente parcialmente implementada que usa el SDK de Visión de Azure AI para analizar las caras en una imagen.
+En este ejercicio, completarás una aplicación cliente parcialmente implementada que usa el SDK de Visión de Azure AI para analizar las caras de una imagen.
 
 > **Nota**: Puede elegir usar el SDK para **C#** o **Python**. En los pasos siguientes, realice las acciones adecuadas para su lenguaje preferido.
 
-1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **04-face** y expanda la carpeta **C-Sharp** o **Python** según sus preferencias de lenguaje.
-2. Haga clic con el botón derecho en la carpeta **computer-vision** y abra un terminal integrado. A continuación, instale el paquete del SDK de Visión de Azure AI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+1. En Visual Studio Code, en el panel **Explorador**, navega hasta la carpeta **04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
+2. Haga clic con el botón derecho en la carpeta **computer-vision** y abra un terminal integrado. Después, instala el paquete del SDK de Visión de Azure AI ejecutando el comando adecuado para tus preferencias de lenguaje:
 
     **C#**
 
     ```
-    dotnet add package Microsoft.Azure.CognitiveServices.Vision.ComputerVision --version 6.0.0
+    dotnet add package Azure.AI.Vision.ImageAnalysis --prerelease
     ```
 
     **Python**
 
     ```
-    pip install azure-cognitiveservices-vision-computervision==0.7.0
+    pip install azure-ai-vision
     ```
     
 3. Consulte el contenido de la carpeta **computer-vision** y fíjese en que contiene un archivo para los valores de configuración:
     - **C#** : appsettings.json
     - **Python**: .env
 
-4. Abra el archivo de configuración y actualice los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de Servicios de Azure AI. Guarde los cambios.
+4. Abre el archivo de configuración y actualiza los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de servicios de Azure AI. Guarde los cambios.
 
 5. Tenga en cuenta que la carpeta **computer-vision** contiene un archivo de código para la aplicación cliente:
 
     - **C#** : Program.cs
-    - **Python**: detect-faces.py
+    - **Python**: detect-people.py
 
-6. Abra el archivo de código y, en la parte superior, en las referencias de espacios de nombres existentes, busque el comentario **Import namespaces** (Importar espacios de nombres). A continuación, en este comentario, agregue el siguiente código específico del lenguaje para importar los espacios de nombres que necesitará para usar el SDK de Visión de Azure AI:
+6. Abra el archivo de código y, en la parte superior, en las referencias de espacio de nombres existentes, busque el comentario **Importar espacios de nombres**. Luego, en este comentario, agrega el siguiente código específico del lenguaje para importar los espacios de nombres que necesitarás para usar el SDK de Visión de Azure AI:
 
     **C#**
 
     ```C#
     // import namespaces
-    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
+    using Azure.AI.Vision.Common;
+    using Azure.AI.Vision.ImageAnalysis;
     ```
 
     **Python**
 
     ```Python
     # import namespaces
-    from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-    from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
-    from msrest.authentication import CognitiveServicesCredentials
+    import azure.ai.vision as sdk
     ```
 
 ## Visualización de la imagen que se va a analizar
 
-En este ejercicio, usará el servicio Visión de Azure AI para analizar una imagen de personas.
+En este ejercicio, usarás el servicio Visión de Azure AI para analizar una imagen de personas.
 
 1. En Visual Studio Code, expanda la carpeta **computer-vision** y la carpeta **images** que contiene.
 2. Seleccione la imagen **people.jpg** para verla.
 
 ## Detectar caras en una imagen
 
-Ahora ya puede usar el SDK para llamar al servicio Visión y detectar caras en una imagen.
+Ahora ya puedes usar el SDK para llamar al servicio Visión y detectar caras en una imagen.
 
-1. En el archivo de código de la aplicación cliente (**Program.cs** o **detect-faces.py**), en la función **Main**, observe que se ha proporcionado el código para cargar los valores de configuración. A continuación, busque el comentario **Authenticate Azure AI Vision client (Autenticar cliente de Computer Vision)**. A continuación, en este comentario, agregue el siguiente código específico del lenguaje para crear y autenticar un objeto de cliente de Visión de Azure AI:
+1. En el archivo de código de la aplicación cliente (**Program.cs** o **detect-faces.py**), en la función **Main**, observa que se ha suministrado el código para cargar los valores de configuración. Después, busca el comentario **Autenticar cliente de Visión de Azure AI**. Después, en este comentario, agrega el siguiente código específico del lenguaje para crear y autenticar un objeto de cliente de Visión de Azure AI:
 
     **C#**
 
     ```C#
     // Authenticate Azure AI Vision client
-    ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
-    cvClient = new ComputerVisionClient(credentials)
-    {
-        Endpoint = cogSvcEndpoint
-    };
+    var cvClient = new VisionServiceOptions(
+        aiSvcEndpoint,
+        new AzureKeyCredential(aiSvcKey));
     ```
 
     **Python**
 
     ```Python
     # Authenticate Azure AI Vision client
-    credential = CognitiveServicesCredentials(cog_key) 
-    cv_client = ComputerVisionClient(cog_endpoint, credential)
+    cv_client = sdk.VisionServiceOptions(ai_endpoint, ai_key)
     ```
 
-2. En la función **Main**, en el código que acaba de agregar, observe que el código especifica la ruta de acceso a un archivo de imagen y, a continuación, pasa la ruta de acceso de la imagen a una función denominada **AnalyzeFaces**. Esta función aún no está totalmente implementada.
+2. En la función **Main**, bajo el código que acabas de agregar, observa que el código especifica la ruta de acceso a un archivo de imagen y, luego, pasa la ruta de acceso de la imagen a una función denominada **AnalyzeImage**. Esta función aún no está totalmente implementada.
 
-3. En la función **AnalyzeFaces**, debajo del comentario **Specify features to be retrieved (faces)** (Especificar características que se recuperarán [caras]), agregue el código siguiente:
+3. En la función **AnalyzeImage**, bajo el comentario **Specify features to be retrieved (PEOPLE)** (Especificar características que se recuperarán), añade el código siguiente:
 
     **C#**
 
     ```C#
-    // Specify features to be retrieved (faces)
-    List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
-    {
-        VisualFeatureTypes.Faces
-    };
+    // Specify features to be retrieved (PEOPLE)
+    Features =
+        ImageAnalysisFeature.People
     ```
 
     **Python**
 
     ```Python
-    # Specify features to be retrieved (faces)
-    features = [VisualFeatureTypes.faces]
+    # Specify features to be retrieved (PEOPLE)
+    analysis_options = sdk.ImageAnalysisOptions()
+    
+    features = analysis_options.features = (
+        sdk.ImageAnalysisFeature.PEOPLE
+    )    
     ```
 
-4. En la función **AnalyzeFaces**, debajo del comentario **Get image analysis** (Obtener análisis de imagen), agregue el código siguiente:
+4. En la función **AnalyzeFaces**, bajo del comentario **Get image analysis** (Obtener análisis de imágenes), añade el código siguiente:
 
-**C#**
+    **C#**
 
-```C
-// Get image analysis
-using (var imageData = File.OpenRead(imageFile))
-{    
-    var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
-
-    // Get faces
-    if (analysis.Faces.Count > 0)
+    ```C
+    // Get image analysis
+    using var imageSource = VisionSource.FromFile(imageFile);
+    
+    using var analyzer = new ImageAnalyzer(serviceOptions, imageSource, analysisOptions);
+    
+    var result = analyzer.Analyze();
+    
+    if (result.Reason == ImageAnalysisResultReason.Analyzed)
     {
-        Console.WriteLine($"{analysis.Faces.Count} faces detected.");
-
-        // Prepare image for drawing
-        Image image = Image.FromFile(imageFile);
-        Graphics graphics = Graphics.FromImage(image);
-        Pen pen = new Pen(Color.LightGreen, 3);
-        Font font = new Font("Arial", 3);
-        SolidBrush brush = new SolidBrush(Color.LightGreen);
-
-        // Draw and annotate each face
-        foreach (var face in analysis.Faces)
+        // Get people in the image
+        if (result.People != null)
         {
-            var r = face.FaceRectangle;
-            Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
-            graphics.DrawRectangle(pen, rect);
-            string annotation = $"Person at approximately {r.Left}, {r.Top}";
-            graphics.DrawString(annotation,font,brush,r.Left, r.Top);
+            Console.WriteLine($" People:");
+        
+            // Prepare image for drawing
+            System.Drawing.Image image = System.Drawing.Image.FromFile(imageFile);
+            Graphics graphics = Graphics.FromImage(image);
+            Pen pen = new Pen(Color.Cyan, 3);
+            Font font = new Font("Arial", 16);
+            SolidBrush brush = new SolidBrush(Color.WhiteSmoke);
+        
+            foreach (var person in result.People)
+            {
+                // Draw object bounding box if confidence > 50%
+                if (person.Confidence > 0.5)
+                {
+                    // Draw object bounding box
+                    var r = person.BoundingBox;
+                    Rectangle rect = new Rectangle(r.X, r.Y, r.Width, r.Height);
+                    graphics.DrawRectangle(pen, rect);
+        
+                    // Return the confidence of the person detected
+                    Console.WriteLine($"   Bounding box {person.BoundingBox}, Confidence {person.Confidence:0.0000}");
+                }
+            }
+        
+            // Save annotated image
+            String output_file = "detected_people.jpg";
+            image.Save(output_file);
+            Console.WriteLine("  Results saved in " + output_file + "\n");
         }
-
-        // Save annotated image
-        String output_file = "detected_faces.jpg";
-        image.Save(output_file);
-        Console.WriteLine(" Results saved in " + output_file);   
     }
-}        
-```
+    else
+    {
+        var errorDetails = ImageAnalysisErrorDetails.FromResult(result);
+        Console.WriteLine(" Analysis failed.");
+        Console.WriteLine($"   Error reason : {errorDetails.Reason}");
+        Console.WriteLine($"   Error code : {errorDetails.ErrorCode}");
+        Console.WriteLine($"   Error message: {errorDetails.Message}\n");
+    }
+    
+    ```
 
-**Python**
-
-```Python
-# Get image analysis
-with open(image_file, mode="rb") as image_data:
-    analysis = cv_client.analyze_image_in_stream(image_data , features)
-
-    # Get faces
-    if analysis.faces:
-        print(len(analysis.faces), 'faces detected.')
-
-        # Prepare image for drawing
-        fig = plt.figure(figsize=(8, 6))
-        plt.axis('off')
-        image = Image.open(image_file)
-        draw = ImageDraw.Draw(image)
-        color = 'lightgreen'
-
-        # Draw and annotate each face
-        for face in analysis.faces:
-            r = face.face_rectangle
-            bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
+    **Python**
+    
+    ```Python
+    # Get image analysis
+    image = sdk.VisionSource(image_file)
+    
+    image_analyzer = sdk.ImageAnalyzer(cv_client, image, analysis_options)
+    
+    result = image_analyzer.analyze()
+    
+    if result.reason == sdk.ImageAnalysisResultReason.ANALYZED:
+        # Get people in the image
+        if result.people is not None:
+            print("\nPeople in image:")
+        
+            # Prepare image for drawing
+            image = Image.open(image_file)
+            fig = plt.figure(figsize=(image.width/100, image.height/100))
+            plt.axis('off')
             draw = ImageDraw.Draw(image)
-            draw.rectangle(bounding_box, outline=color, width=5)
-            annotation = 'Person at approximately {}, {}'.format(r.left, r.top)
-            plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
-
-        # Save annotated image
-        plt.imshow(image)
-        outputfile = 'detected_faces.jpg'
-        fig.savefig(outputfile)
-
-        print('Results saved in', outputfile)
-```
+            color = 'cyan'
+        
+            for detected_people in result.people:
+                # Draw object bounding box if confidence > 50%
+                if detected_people.confidence > 0.5:
+                    # Draw object bounding box
+                    r = detected_people.bounding_box
+                    bounding_box = ((r.x, r.y), (r.x + r.w, r.y + r.h))
+                    draw.rectangle(bounding_box, outline=color, width=3)
+            
+                    # Return the confidence of the person detected
+                    print(" {} (confidence: {:.2f}%)".format(detected_people.bounding_box, detected_people.confidence * 100))
+                    
+            # Save annotated image
+            plt.imshow(image)
+            plt.tight_layout(pad=0)
+            outputfile = 'detected_people.jpg'
+            fig.savefig(outputfile)
+            print('  Results saved in', outputfile)
+    
+    else:
+        error_details = sdk.ImageAnalysisErrorDetails.from_result(result)
+        print(" Analysis failed.")
+        print("   Error reason: {}".format(error_details.reason))
+        print("   Error code: {}".format(error_details.error_code))
+        print("   Error message: {}".format(error_details.message))
+    ```
 
 5. Guarde los cambios y vuelva al terminal integrado de la carpeta **computer-vision** y escriba el siguiente comando para ejecutar el programa:
 
@@ -226,15 +254,15 @@ with open(image_file, mode="rb") as image_data:
     **Python**
 
     ```
-    python detect-faces.py
+    python detect-people.py
     ```
 
 6. Observe la salida, que debe indicar el número de caras detectadas.
-7. Consulte el archivo **detected_faces.jpg** que se genera en la misma carpeta que el archivo de código para ver las caras anotadas. En este caso, el código ha usado los atributos de la cara para etiquetar la ubicación de la parte superior izquierda del rectángulo y las coordenadas del rectángulo delimitador para dibujar un rectángulo alrededor de cada cara.
+7. Consulta el archivo **detected_faces.jpg** que se genera en la misma carpeta que el archivo de código para ver las caras anotadas. En este caso, el código ha usado los atributos de la cara para etiquetar la ubicación de la parte superior izquierda del rectángulo y las coordenadas del rectángulo delimitador para dibujar un rectángulo alrededor de cada cara.
 
 ## Preparación para el uso del SDK de Face
 
-Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras capacidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
+Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras funcionalidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
 
 1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **19-face** y expanda la carpeta **C-Sharp** o **Python** según sus preferencias de lenguaje.
 2. Haga clic con el botón derecho en la carpeta **face-api** y abra un terminal integrado. A continuación, instale el paquete del SDK de Face mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
@@ -242,27 +270,27 @@ Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (j
     **C#**
 
     ```
-    dotnet add package Microsoft.Azure.CognitiveServices.Vision.Face --version 2.6.0-preview.1
+    dotnet add package Microsoft.Azure.CognitiveServices.Vision.Face --version 2.8.0-preview.3
     ```
 
     **Python**
 
     ```
-    pip install azure-cognitiveservices-vision-face==0.4.1
+    pip install azure-cognitiveservices-vision-face==0.6.0
     ```
     
 3. Consulte el contenido de la carpeta **face-api** y fíjese en que contiene un archivo para los valores de configuración:
     - **C#** : appsettings.json
     - **Python**: .env
 
-4. Abra el archivo de configuración y actualice los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de Servicios de Azure AI. Guarde los cambios.
+4. Abre el archivo de configuración y actualiza los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de servicios de Azure AI. Guarde los cambios.
 
 5. Tenga en cuenta que la carpeta **face-api** contiene un archivo de código para la aplicación cliente:
 
     - **C#** : Program.cs
     - **Python**: analyze-faces.py
 
-6. Abra el archivo de código y, en la parte superior, en las referencias de espacios de nombres existentes, busque el comentario **Import namespaces** (Importar espacios de nombres). A continuación, en este comentario, agregue el siguiente código específico del lenguaje para importar los espacios de nombres que necesitará para usar el SDK de Visión:
+6. Abra el archivo de código y, en la parte superior, en las referencias de espacios de nombres existentes, busque el comentario **Import namespaces** (Importar espacios de nombres). Después, en este comentario, agrega el siguiente código específico del lenguaje para importar los espacios de nombres que necesitarás para usar el SDK de Visión:
 
     **C#**
 
@@ -302,7 +330,7 @@ Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (j
     face_client = FaceClient(cog_endpoint, credentials)
     ```
 
-8. En la función **Main (Principal)**, en el código que acaba de agregar, tenga en cuenta que el código muestra un menú que le permite llamar a funciones en el código para explorar las capacidades del servicio Face. Implementará estas funciones en lo que queda de este ejercicio.
+8. En la función **Main**, en el código que acaba de agregar, tenga en cuenta que el código muestra un menú que le permite llamar a funciones en el código para explorar las funcionalidades del servicio Face. Implementará estas funciones en lo que queda de este ejercicio.
 
 ## Detección y análisis de caras
 
@@ -315,7 +343,7 @@ Una de las funcionalidades más fundamentales del servicio Face es la detección
 
     ```C#
     // Specify facial features to be retrieved
-    List<FaceAttributeType?> features = new List<FaceAttributeType?>
+    IList<FaceAttributeType> features = new FaceAttributeType[]
     {
         FaceAttributeType.Occlusion,
         FaceAttributeType.Blur,
@@ -342,16 +370,16 @@ using (var imageData = File.OpenRead(imageFile))
 {    
     var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features, returnFaceId: false);
 
-    if (detected_faces.Count > 0)
+    if (detected_faces.Count() > 0)
     {
-        Console.WriteLine($"{detected_faces.Count} faces detected.");
+        Console.WriteLine($"{detected_faces.Count()} faces detected.");
 
         // Prepare image for drawing
         Image image = Image.FromFile(imageFile);
         Graphics graphics = Graphics.FromImage(image);
         Pen pen = new Pen(Color.LightGreen, 3);
         Font font = new Font("Arial", 4);
-        SolidBrush brush = new SolidBrush(Color.Black);
+        SolidBrush brush = new SolidBrush(Color.White);
         int faceCount=0;
 
         // Draw and annotate each face
@@ -370,7 +398,7 @@ using (var imageData = File.OpenRead(imageFile))
             var r = face.FaceRectangle;
             Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
             graphics.DrawRectangle(pen, rect);
-            string annotation = $"Face ID: {face.FaceId}";
+            string annotation = $"Face number {faceCount}";
             graphics.DrawString(annotation,font,brush,r.Left, r.Top);
         }
 
@@ -427,7 +455,7 @@ with open(image_file, mode="rb") as image_data:
             bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
             draw = ImageDraw.Draw(image)
             draw.rectangle(bounding_box, outline=color, width=5)
-            annotation = 'Face ID: {}'.format(face.face_id)
+            annotation = 'Face number {}'.format(face_count)
             plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
 
         # Save annotated image
@@ -460,8 +488,8 @@ with open(image_file, mode="rb") as image_data:
 
 ## Más información
 
-Hay varias características adicionales disponibles en el servicio **Face** pero, en función del [Estándar de inteligencia artificial responsable](https://aka.ms/aah91ff), están restringidas por una directiva de acceso limitado. Estas características incluyen la identificación, comprobación y creación de modelos de reconocimiento facial. Para más información y solicitar acceso, consulte el [acceso limitado a los Servicios de Azure AI](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
+Hay varias características adicionales disponibles en el servicio **Face** pero, en función del [Estándar de inteligencia artificial responsable](https://aka.ms/aah91ff), están restringidas por una directiva de acceso limitado. Estas características incluyen la identificación, comprobación y creación de modelos de reconocimiento facial. Para más información y solicitar acceso, consulta el [Acceso limitado para Servicios de Azure AI](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
 
-Para obtener más información sobre cómo usar el servicio **Visión de Azure AI** para la detección de caras, consulte la [documentación de Visión de Azure AI](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
+Para obtener más información sobre cómo usar el servicio **Visión de Azure AI** para la detección de caras, consulta la [documentación de Visión de Azure AI](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
 
 Para obtener más información sobre el servicio **Face**, consulte la [documentación de Face](https://docs.microsoft.com/azure/cognitive-services/face/).
