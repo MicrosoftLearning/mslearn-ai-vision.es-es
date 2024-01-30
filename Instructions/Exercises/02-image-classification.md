@@ -1,10 +1,10 @@
 ---
 lab:
-  title: Clasificación de imágenes con el modelo personalizado de Visión de Azure AI
+  title: Clasificación de imágenes con un modelo personalizado de Visión de Azure AI
   module: Module 2 - Develop computer vision solutions with Azure AI Vision
 ---
 
-# Clasificación de imágenes con el modelo personalizado de Visión de Azure AI
+# Clasificación de imágenes con un modelo personalizado de Visión de Azure AI
 
 Visión de Azure AI te permite entrenar modelos personalizados para clasificar y detectar objetos con las etiquetas que especifiques. En este laboratorio, compilaremos un modelo de clasificación de imágenes personalizado para clasificar imágenes de fruta.
 
@@ -21,10 +21,10 @@ Si aún no has clonado el repositorio de código de **Visión de Azure AI** en e
 
 ## Aprovisionamiento de los recursos de Azure
 
-Si aún no tienes uno en tu suscripción, deberás aprovisionar un recurso de **Servicios de Azure AI**.
+Si aún no tiene uno en su suscripción, deberá aprovisionar un recurso de **Servicios de Azure AI**.
 
 1. Inicie sesión en Azure Portal en `https://portal.azure.com` y regístrese con la cuenta de Microsoft asociada a su suscripción de Azure.
-2. En la barra de búsqueda superior, busca *Servicios de Azure AI*, selecciona **Servicios de Azure AI** y crea un recurso de cuenta multiservicio de servicios de Azure AI con la siguiente configuración:
+2. En la barra de búsqueda superior, busque *Servicios de Azure AI*, seleccione **Servicios de Azure AI** y cree un recurso de cuenta de varios servicios de Azure AI con la siguiente configuración:
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *elija o cree un grupo de recursos (si usa una suscripción restringida, es posible que no tenga permiso para crear un nuevo grupo de recursos; use el proporcionado)*
     - **Región**: *elige entre Este de EE. UU., Oeste de Europa, Oeste de EE. UU. 2\**
@@ -70,7 +70,7 @@ Ahora, crearás un nuevo proyecto de entrenamiento para la clasificación de im�
 
 1. En el explorador web, navega hasta `https://portal.vision.cognitive.azure.com/` e inicia sesión con la cuenta Microsoft en la que creaste el recurso de Azure AI.
 1. Selecciona el icono **Personalizar modelos con imágenes** (lo puedes encontrar en la pestaña **Análisis de imágenes** si no se muestra en la vista predeterminada) y, si te lo solicitan, selecciona el recurso de Azure AI que creaste.
-1. En el proyecto, selecciona **Agregar nuevo conjunto de datos** en la parte superior. Configure  con la siguiente configuración:
+1. En el proyecto, selecciona **Agregar nuevo conjunto de datos** en la parte superior. Configure con la siguiente configuración:
     - **Nombre del conjunto de datos**: training_images
     - **Tipo de modelo**: clasificación de imágenes
     - **Selecciona Contenedor de Azure Blob Storage**: selecciona **Seleccionar contenedor**
