@@ -24,7 +24,7 @@ Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 Si aún no tiene uno en su suscripción, deberá aprovisionar un recurso de **Servicios de Azure AI**.
 
 1. Inicie sesión en Azure Portal en `https://portal.azure.com` y regístrese con la cuenta de Microsoft asociada a su suscripción de Azure.
-2. En la barra de búsqueda superior, busque *Servicios de Azure AI*, seleccione **Servicios de Azure AI** y cree un recurso de cuenta de varios Servicios de Azure AI con la siguiente configuración:
+2. En la barra de búsqueda superior, busque *Servicios de Azure AI*, seleccione **Servicios de Azure AI** y cree un recurso de cuenta de varios servicios de Azure AI con la siguiente configuración:
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *elija o cree un grupo de recursos (si usa una suscripción restringida, es posible que no tenga permiso para crear un nuevo grupo de recursos; use el proporcionado)*
     - **Región**: *elija entre Este de EE. UU., Centro de Francia, Centro de Corea, Norte de Europa, Sudeste asiático, Oeste de Europa, Oeste de EE. UU. o Este de Asia\**
@@ -49,7 +49,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
     **C#**
     
     ```csharp
-    dotnet add package Azure.AI.Vision.ImageAnalysis --prerelease
+    dotnet add package Azure.AI.Vision.ImageAnalysis -v 0.15.1-beta.1
     ```
 
     > **Nota**: Si se le pide que instale extensiones del kit de desarrollo, puede cerrar el mensaje de forma segura.
@@ -57,7 +57,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
     **Python**
     
     ```python
-    pip install azure-ai-vision
+    pip install azure-ai-vision==0.15.1b1
     ```
 
 3. Consulte el contenido de la carpeta **read-text** y fíjese en que contiene un archivo para los valores de configuración:

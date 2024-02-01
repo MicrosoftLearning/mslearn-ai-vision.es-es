@@ -6,9 +6,9 @@ lab:
 
 # Detección y análisis de caras
 
-La capacidad de detectar y analizar caras de personas es una funcionalidad básica de la inteligencia artificial. En este ejercicio, explorarás dos servicios de Azure AI que puedes usar para trabajar con caras de imágenes: el servicio **Visión de Azure AI** y el servicio **Face**.
+La capacidad de detectar y analizar caras de personas es una funcionalidad básica de la inteligencia artificial. En este ejercicio, explorará dos servicios de Azure AI que puede usar para trabajar con caras en imágenes: el servicio **Azure AI Vision** y el servicio **Face**.
 
-> **Nota**: a partir del 21 de junio de 2022, las funcionalidades de servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Estas restricciones pueden afectar a este ejercicio de laboratorio. Estamos trabajando para solucionar esto, pero, mientras tanto, es posible que experimente algunos errores al realizar los pasos siguientes; es por ello que nos disculpamos. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
+> **Nota**: A partir del 21 de junio de 2022, las capacidades de los Servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Estas restricciones pueden afectar a este ejercicio de laboratorio. Estamos trabajando para solucionar esto, pero, mientras tanto, es posible que experimente algunos errores al realizar los pasos siguientes; es por ello que nos disculpamos. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
 
 ## Clonación del repositorio para este curso
 
@@ -23,10 +23,10 @@ Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 
 ## Aprovisionamiento de un recurso de Servicios de Azure AI
 
-Si aún no tienes uno en tu suscripción, deberás aprovisionar un recurso de **Servicios de Azure AI**.
+Si aún no tiene uno en su suscripción, deberá aprovisionar un recurso de **Servicios de Azure AI**.
 
 1. Inicie sesión en Azure Portal en `https://portal.azure.com` y regístrese con la cuenta de Microsoft asociada a su suscripción de Azure.
-2. En la barra de búsqueda superior, busca *Servicios de Azure AI*, selecciona **Servicios de Azure AI** y crea un recurso de cuenta multiservicio de servicios de Azure AI con la siguiente configuración:
+2. En la barra de búsqueda superior, busque *Servicios de Azure AI*, seleccione **Servicios de Azure AI** y cree un recurso de cuenta de varios servicios de Azure AI con la siguiente configuración:
     - **Suscripción**: *suscripción de Azure*
     - **Grupo de recursos**: *elija o cree un grupo de recursos (si usa una suscripción restringida, es posible que no tenga permiso para crear un nuevo grupo de recursos; use el proporcionado)*
     - **Región**: *elija cualquier región disponible*
@@ -36,39 +36,39 @@ Si aún no tienes uno en tu suscripción, deberás aprovisionar un recurso de **
 4. Espere a que se complete la implementación y, a continuación, consulte los detalles.
 5. Cuando se haya implementado el recurso, vaya a él y vea su página **Claves y punto de conexión**. Necesitará el punto de conexión y una de las claves de esta página en el procedimiento siguiente.
 
-## Preparación para el uso del SDK de Visión de Azure AI
+## Prepararse para usar el SDK de Visión de Azure AI
 
-En este ejercicio, completarás una aplicación cliente parcialmente implementada que usa el SDK de Visión de Azure AI para analizar las caras de una imagen.
+En este ejercicio, completará una aplicación cliente parcialmente implementada que usa el SDK de Visión de Azure AI para analizar las caras en una imagen.
 
 > **Nota**: Puede elegir usar el SDK para **C#** o **Python**. En los pasos siguientes, realice las acciones adecuadas para su lenguaje preferido.
 
 1. En Visual Studio Code, en el panel **Explorador**, navega hasta la carpeta **04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
-2. Haga clic con el botón derecho en la carpeta **computer-vision** y abra un terminal integrado. Después, instala el paquete del SDK de Visión de Azure AI ejecutando el comando adecuado para tus preferencias de lenguaje:
+2. Haga clic con el botón derecho en la carpeta **computer-vision** y abra un terminal integrado. A continuación, instale el paquete del SDK de Visión de Azure AI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#**
 
     ```
-    dotnet add package Azure.AI.Vision.ImageAnalysis --prerelease
+    dotnet add package Azure.AI.Vision.ImageAnalysis -v 0.15.1-beta.1
     ```
 
     **Python**
 
     ```
-    pip install azure-ai-vision
+    pip install azure-ai-vision==0.15.1b1
     ```
     
 3. Consulte el contenido de la carpeta **computer-vision** y fíjese en que contiene un archivo para los valores de configuración:
     - **C#** : appsettings.json
     - **Python**: .env
 
-4. Abre el archivo de configuración y actualiza los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de servicios de Azure AI. Guarde los cambios.
+4. Abra el archivo de configuración y actualice los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de Servicios de Azure AI. Guarde los cambios.
 
 5. Tenga en cuenta que la carpeta **computer-vision** contiene un archivo de código para la aplicación cliente:
 
     - **C#** : Program.cs
     - **Python**: detect-people.py
 
-6. Abra el archivo de código y, en la parte superior, en las referencias de espacio de nombres existentes, busque el comentario **Importar espacios de nombres**. Luego, en este comentario, agrega el siguiente código específico del lenguaje para importar los espacios de nombres que necesitarás para usar el SDK de Visión de Azure AI:
+6. Abra el archivo de código y, en la parte superior, en las referencias de espacio de nombres existentes, busque el comentario **Import namespaces (Importar espacios de nombres)**. A continuación, en este comentario, agregue el siguiente código específico del lenguaje para importar los espacios de nombres que necesitará para usar el SDK de Visión de Azure AI:
 
     **C#**
 
@@ -87,16 +87,16 @@ En este ejercicio, completarás una aplicación cliente parcialmente implementad
 
 ## Visualización de la imagen que se va a analizar
 
-En este ejercicio, usarás el servicio Visión de Azure AI para analizar una imagen de personas.
+En este ejercicio, usará el servicio Visión de Azure AI para analizar una imagen de personas.
 
 1. En Visual Studio Code, expanda la carpeta **computer-vision** y la carpeta **images** que contiene.
 2. Seleccione la imagen **people.jpg** para verla.
 
 ## Detectar caras en una imagen
 
-Ahora ya puedes usar el SDK para llamar al servicio Visión y detectar caras en una imagen.
+Ahora ya puede usar el SDK para llamar al servicio Visión y detectar caras en una imagen.
 
-1. En el archivo de código de la aplicación cliente (**Program.cs** o **detect-faces.py**), en la función **Main**, observa que se ha suministrado el código para cargar los valores de configuración. Después, busca el comentario **Autenticar cliente de Visión de Azure AI**. Después, en este comentario, agrega el siguiente código específico del lenguaje para crear y autenticar un objeto de cliente de Visión de Azure AI:
+1. En el archivo de código de la aplicación cliente (**Program.cs** o **detect-faces.py**), en la función **Main**, observa que se ha suministrado el código para cargar los valores de configuración. A continuación, busque el comentario **Authenticate Azure AI Vision client (Autenticar cliente de Computer Vision)**. A continuación, en este comentario, agregue el siguiente código específico del lenguaje para crear y autenticar un objeto de cliente de Visión de Azure AI:
 
     **C#**
 
@@ -262,7 +262,7 @@ Ahora ya puedes usar el SDK para llamar al servicio Visión y detectar caras en 
 
 ## Preparación para el uso del SDK de Face
 
-Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras funcionalidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
+Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras capacidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
 
 1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **19-face** y expanda la carpeta **C-Sharp** o **Python** según sus preferencias de lenguaje.
 2. Haga clic con el botón derecho en la carpeta **face-api** y abra un terminal integrado. A continuación, instale el paquete del SDK de Face mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
@@ -283,14 +283,14 @@ Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (j
     - **C#** : appsettings.json
     - **Python**: .env
 
-4. Abre el archivo de configuración y actualiza los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de servicios de Azure AI. Guarde los cambios.
+4. Abra el archivo de configuración y actualice los valores de configuración que contiene para reflejar el **punto de conexión** y una **clave** de autenticación para el recurso de Servicios de Azure AI. Guarde los cambios.
 
 5. Tenga en cuenta que la carpeta **face-api** contiene un archivo de código para la aplicación cliente:
 
     - **C#** : Program.cs
     - **Python**: analyze-faces.py
 
-6. Abra el archivo de código y, en la parte superior, en las referencias de espacios de nombres existentes, busque el comentario **Import namespaces** (Importar espacios de nombres). Después, en este comentario, agrega el siguiente código específico del lenguaje para importar los espacios de nombres que necesitarás para usar el SDK de Visión:
+6. Abra el archivo de código y, en la parte superior, en las referencias de espacios de nombres existentes, busque el comentario **Import namespaces** (Importar espacios de nombres). A continuación, en este comentario, agregue el siguiente código específico del lenguaje para importar los espacios de nombres que necesitará para usar el SDK de Visión:
 
     **C#**
 
@@ -330,7 +330,7 @@ Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (j
     face_client = FaceClient(cog_endpoint, credentials)
     ```
 
-8. En la función **Main**, en el código que acaba de agregar, tenga en cuenta que el código muestra un menú que le permite llamar a funciones en el código para explorar las funcionalidades del servicio Face. Implementará estas funciones en lo que queda de este ejercicio.
+8. En la función **Main (Principal)**, en el código que acaba de agregar, tenga en cuenta que el código muestra un menú que le permite llamar a funciones en el código para explorar las capacidades del servicio Face. Implementará estas funciones en lo que queda de este ejercicio.
 
 ## Detección y análisis de caras
 
@@ -488,8 +488,8 @@ with open(image_file, mode="rb") as image_data:
 
 ## Más información
 
-Hay varias características adicionales disponibles en el servicio **Face** pero, en función del [Estándar de inteligencia artificial responsable](https://aka.ms/aah91ff), están restringidas por una directiva de acceso limitado. Estas características incluyen la identificación, comprobación y creación de modelos de reconocimiento facial. Para más información y solicitar acceso, consulta el [Acceso limitado para Servicios de Azure AI](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
+Hay varias características adicionales disponibles en el servicio **Face** pero, en función del [Estándar de inteligencia artificial responsable](https://aka.ms/aah91ff), están restringidas por una directiva de acceso limitado. Estas características incluyen la identificación, comprobación y creación de modelos de reconocimiento facial. Para más información y solicitar acceso, consulte el [acceso limitado a los Servicios de Azure AI](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-limited-access).
 
-Para obtener más información sobre cómo usar el servicio **Visión de Azure AI** para la detección de caras, consulta la [documentación de Visión de Azure AI](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
+Para obtener más información sobre cómo usar el servicio **Visión de Azure AI** para la detección de caras, consulte la [documentación de Visión de Azure AI](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-detecting-faces).
 
 Para obtener más información sobre el servicio **Face**, consulte la [documentación de Face](https://docs.microsoft.com/azure/cognitive-services/face/).
