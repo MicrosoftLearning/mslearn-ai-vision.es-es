@@ -264,7 +264,7 @@ Ahora ya puede usar el SDK para llamar al servicio Visión y detectar caras en u
 
 Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras capacidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
 
-1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **19-face** y expanda la carpeta **C-Sharp** o **Python** según sus preferencias de lenguaje.
+1. En Visual Studio Code, en el panel **Explorador**, navega hasta la carpeta **04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
 2. Haga clic con el botón derecho en la carpeta **face-api** y abra un terminal integrado. A continuación, instale el paquete del SDK de Face mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#**
