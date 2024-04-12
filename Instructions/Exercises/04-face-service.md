@@ -1,14 +1,16 @@
 ---
 lab:
   title: Detección y análisis de caras
-  module: 'Module 10 - Detecting, Analyzing, and Recognizing Faces'
+  module: Module 4 - Detecting and Analyze Faces
 ---
 
 # Detección y análisis de caras
 
 La capacidad de detectar y analizar caras de personas es una funcionalidad básica de la inteligencia artificial. En este ejercicio, explorará dos servicios de Azure AI que puede usar para trabajar con caras en imágenes: el servicio **Azure AI Vision** y el servicio **Face**.
 
-> **Nota**: A partir del 21 de junio de 2022, las capacidades de los Servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Estas restricciones pueden afectar a este ejercicio de laboratorio. Estamos trabajando para solucionar esto, pero, mientras tanto, es posible que experimente algunos errores al realizar los pasos siguientes; es por ello que nos disculpamos. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
+> **Importante**: Este laboratorio se puede completar sin solicitar acceso adicional a características restringidas.
+
+> **Nota**: A partir del 21 de junio de 2022, las capacidades de los Servicios de Azure AI que devuelven información de identificación personal están restringidas a los clientes a los que se les ha concedido [acceso limitado](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-limited-access). Además, las funcionalidades que infieren el estado emocional ya no están disponibles. Para obtener más detalles sobre los cambios realizados por Microsoft y la razón de estos, consulte el blog sobre [inversiones de inteligencia artificial y medidas de seguridad responsables para el reconocimiento facial](https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/).
 
 ## Clonación del repositorio para este curso
 
