@@ -29,8 +29,9 @@ En primer lugar, deberá iniciar sesión en el portal de Video Analyzer y cargar
 
 1. En el explorador, abra el portal de Video Analyzer en `https://www.videoindexer.ai`.
 2. Si ya tiene una cuenta de Video Analyzer, inicie sesión. De lo contrario, regístrese para obtener una cuenta gratuita e inicie sesión con su cuenta Microsoft (o cualquier otro tipo de cuenta válido). Si tiene dificultades para iniciar sesión, intente abrir una sesión privada del explorador.
-3. En Video Analyzer, seleccione la opción **Cargar**. A continuación, seleccione la opción para **escribir una URL**, escriba `https://aka.ms/responsible-ai-video` y haga clic en **Agregar**. Cambie el nombre predeterminado a **IA responsable**, revise la configuración predeterminada, active la casilla para comprobar el cumplimiento de las directivas de Microsoft para el reconocimiento facial y cargue el archivo.
-4. Una vez cargado el archivo, espere unos minutos mientras Video Analyzer lo indexa automáticamente.
+3. En una nueva pestaña, descargue el vídeo IA responsable visitando `https://aka.ms/responsible-ai-video`. Guarde el archivo.
+4. En Video Analyzer, seleccione la opción **Cargar**. A continuación, seleccione la opción **Buscar archivos**, seleccione el vídeo descargado y haga clic en **Agregar**. Cambie el nombre predeterminado a **IA responsable**, revise la configuración predeterminada, active la casilla para comprobar el cumplimiento de las directivas de Microsoft para el reconocimiento facial y cargue el archivo.
+5. Una vez cargado el archivo, espere unos minutos mientras Video Analyzer lo indexa automáticamente.
 
 > **Nota**: En este ejercicio, vamos a usar este vídeo para explorar la funcionalidad de Video Analyzer; pero debe verlo en su totalidad cuando haya terminado el ejercicio, ya que contiene información útil y una guía para desarrollar aplicaciones habilitadas para la inteligencia artificial de forma responsable. 
 
