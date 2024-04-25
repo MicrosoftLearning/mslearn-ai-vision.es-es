@@ -1,7 +1,6 @@
 ---
 lab:
-  title: Clasificar imágenes con Custom Vision de Azure AI
-  module: Module 9 - Developing Custom Vision Solutions
+  title: Clasificación de imágenes con Custom Vision de Azure AI (heredado)
 ---
 
 # Clasificar imágenes con Custom Vision de Azure AI
