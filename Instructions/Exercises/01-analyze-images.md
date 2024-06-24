@@ -93,7 +93,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
 En este ejercicio, usará el servicio Visión de Azure AI para analizar varias imágenes.
 
 1. En Visual Studio Code, expanda la carpeta **image-analysis** y la carpeta **images** que contiene.
-2. Seleccione cada uno de los archivos de imagen por turnos para verlos en Visual Studio Code.
+2. Seleccione los archivos de imagen de uno en uno para verlos en Visual Studio Code.
 
 ## Análisis de una imagen para sugerir un título
 
