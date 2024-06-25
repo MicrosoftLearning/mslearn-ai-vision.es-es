@@ -93,7 +93,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
 En este ejercicio, usará el servicio Visión de Azure AI para analizar varias imágenes.
 
 1. En Visual Studio Code, expanda la carpeta **image-analysis** y la carpeta **images** que contiene.
-2. Seleccione cada uno de los archivos de imagen por turnos para verlos en Visual Studio Code.
+2. Seleccione los archivos de imagen de uno en uno para verlos en Visual Studio Code.
 
 ## Análisis de una imagen para sugerir un título
 
@@ -431,11 +431,9 @@ using (var client = new HttpClient())
     client.DefaultRequestHeaders.Accept.Add(contentType);
     client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
 
-    // You can change the url to use other images in the images folder,
-    // such as "building.jpg" or "person.jpg" to see different results.
     var data = new
     {
-        url="https://github.com/MicrosoftLearning/mslearn-ai-vision/blob/main/Labfiles/01-analyze-images/Python/image-analysis/images/street.jpg?raw=true"
+        url = $"https://github.com/MicrosoftLearning/mslearn-ai-vision/blob/main/Labfiles/01-analyze-images/Python/image-analysis/{imageFile}?raw=true"
     };
 
     var jsonData = JsonSerializer.Serialize(data);

@@ -198,7 +198,7 @@ Una de las características del **SDK de Visión de Azure AI** es leer texto de 
     // Draw bounding box around line
     var drawLinePolygon = true;
     
-    // Return each line detected in the image and the position bounding box around each line
+    // Return the position bounding box around each line
     
     
     
