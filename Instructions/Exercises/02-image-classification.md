@@ -44,6 +44,8 @@ También necesitamos una cuenta de almacenamiento para almacenar las imágenes d
     - **Nombre de cuenta de almacenamiento**: customclassifySUFFIX 
         - *nota: Reemplaza el token `SUFFIX` por tus iniciales u otro valor para asegurarte de que el nombre del recurso sea globalmente único.*
     - **Región**: *elige la misma región que usaste para el recurso de Servicios de Azure AI*
+    - **Servicio principal**: Azure Blob Storage o Azure Data Lake Storage Gen 2
+    - **Carga de trabajo principal**: otras
     - **Rendimiento**: Estándar
     - **Redundancia**: almacenamiento con redundancia local (LRS)
 1. Mientras se crea la cuenta de almacenamiento, ve a Visual Studio Code y expande la carpeta **Labfiles/02-image-classification**.
@@ -58,18 +60,19 @@ También necesitamos una cuenta de almacenamiento para almacenar las imágenes d
 1. Cierra el archivo JSON y PowerShell, y vuelve a la ventana del explorador.
 1. La cuenta de almacenamiento debería estar completa. Vaya a la cuenta de almacenamiento.
 1. Habilita el acceso público en la cuenta de almacenamiento. En el panel izquierdo, navega hasta **Configuración** en el grupo **Configuración** y habilita *Permitir acceso anónimo de blobs*. Seleccione **Guardar**.
-1. En el panel izquierdo, selecciona **Contenedores**, crea un nuevo contenedor denominado `fruit` y establece **Nivel de acceso anónimo** en *Contenedor (acceso de lectura anónimo para contenedores y blobs).*
+1. En el panel izquierdo, en **Almacenamiento de datos**, selecciona **Contenedores**, crea un nuevo contenedor denominado `fruit` y establece **Nivel de acceso anónimo** en *Contenedor (acceso de lectura anónimo para contenedores y blobs)*.
 
     > **Nota**: Si la opción **Nivel de acceso anónimo** está deshabilitada, actualiza la página del explorador.
 
-1. Navega hasta `fruit` y carga las imágenes (y el archivo JSON) en **Labfiles/02-image-classification/training-images** en ese contenedor.
+1. Navega hasta `fruit`, selecciona **Cargar** y carga las imágenes (y el archivo JSON) en **Labfiles/02-image-classification/training-images** en ese contenedor.
 
 ## Creación de un proyecto de entrenamiento de modelo personalizado
 
 Ahora, crearás un nuevo proyecto de entrenamiento para la clasificación de imágenes personalizada en Vision Studio.
 
 1. En el explorador web, navega hasta `https://portal.vision.cognitive.azure.com/` e inicia sesión con la cuenta Microsoft en la que creaste el recurso de Azure AI.
-1. Selecciona el icono **Personalizar modelos con imágenes** (lo puedes encontrar en la pestaña **Análisis de imágenes** si no se muestra en la vista predeterminada) y, si te lo solicitan, selecciona el recurso de Azure AI que creaste.
+1. Selecciona el icono **Personalizar modelos con imágenes** (lo puedes encontrar en la pestaña **Análisis de imágenes** si no se muestra en la vista predeterminada).
+1. Selecciona la cuenta de Servicios de Azure AI que has creado.
 1. En el proyecto, selecciona **Agregar nuevo conjunto de datos** en la parte superior. Configure con la siguiente configuración:
     - **Nombre del conjunto de datos**: training_images
     - **Tipo de modelo**: clasificación de imágenes
