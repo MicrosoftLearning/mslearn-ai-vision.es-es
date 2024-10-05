@@ -49,7 +49,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
     **C#**
     
     ```
-    dotnet add package Azure.AI.Vision.ImageAnalysis -v 1.0.0-beta.1
+    dotnet add package Azure.AI.Vision.ImageAnalysis -v 1.0.0-beta.3
     ```
 
     > **Nota**: Si se le pide que instale extensiones del kit de desarrollo, puede cerrar el mensaje de forma segura.
@@ -57,7 +57,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
     **Python**
     
     ```
-    pip install azure-ai-vision-imageanalysis==1.0.0b1
+    pip install azure-ai-vision-imageanalysis==1.0.0b3
     ```
 
 3. Consulte el contenido de la carpeta **read-text** y fíjese en que contiene un archivo para los valores de configuración:
