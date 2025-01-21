@@ -6,7 +6,7 @@ lab:
 
 # Análisis de imágenes con Visión de Azure AI
 
-Visión de Azure AI es una capacidad de inteligencia artificial que permite a los sistemas de software interpretar la entrada visual mediante el análisis de imágenes. En Microsoft Azure, el servicio **Visión** de Azure AI proporciona modelos predefinidos para tareas comunes de Computer Vision, incluido el análisis de imágenes para sugerir subtítulos y etiquetas, la detección de objetos comunes y de personas. También puede usar el servicio Visión de Azure AI para quitar el fondo o crear un mate en primer plano de las imágenes.
+Visión de Azure AI es una capacidad de inteligencia artificial que permite a los sistemas de software interpretar la entrada visual mediante el análisis de imágenes. En Microsoft Azure, el servicio **Visión** de Azure AI proporciona modelos predefinidos para tareas comunes de Computer Vision, incluido el análisis de imágenes para sugerir subtítulos y etiquetas, la detección de objetos comunes y de personas. 
 
 ## Clonación del repositorio para este curso
 
@@ -408,86 +408,6 @@ if result.people is not None:
 3. Guarde los cambios y ejecute el programa una vez para cada uno de los archivos de imagen de la carpeta **images**, y observe los objetos que se detectan. Después de cada ejecución, consulte el archivo **objects.jpg** que se genera en la misma carpeta que el archivo de código para ver las caras anotadas.
 
 > **Nota**: En las tareas anteriores, usó un único método para analizar la imagen y, a continuación, agregó código incrementalmente para analizar y mostrar los resultados. El SDK también proporciona métodos individuales para sugerir títulos, identificar etiquetas, detectar objetos, entre otros, lo que significa que puede usar el método más adecuado para devolver solo la información que necesita, lo que reduce el tamaño de la carga de datos que se debe devolver. Consulte la [documentación del SDK de .NET](https://learn.microsoft.com/dotnet/api/overview/azure/cognitiveservices/computervision?view=azure-dotnet) o la [documentación del SDK de Python](https://learn.microsoft.com/python/api/azure-cognitiveservices-vision-computervision/azure.cognitiveservices.vision.computervision) para más detalles.
-
-## Quitar el fondo o generar un mate de primer plano de una imagen
-
-En algunos casos, es posible que tenga que crear o eliminar el fondo de una imagen o puede que desee crear un mate en primer plano de esa imagen. Comencemos con la eliminación del fondo.
-
-1. En el archivo de código, busque la función **BackgroundForeground** y, en el comentario **Remove the background from the image or generate a foreground matte (Eliminar el fondo de la imagen o generar un mate en primer plano)**, agregue el siguiente código:
-
-**C#**
-
-```C#
-// Remove the background from the image or generate a foreground matte
-Console.WriteLine($" Background removal:");
-// Define the API version and mode
-string apiVersion = "2023-02-01-preview";
-string mode = "backgroundRemoval"; // Can be "foregroundMatting" or "backgroundRemoval"
-
-string url = $"computervision/imageanalysis:segment?api-version={apiVersion}&mode={mode}";
-
-// Make the REST call
-using (var client = new HttpClient())
-{
-    var contentType = new MediaTypeWithQualityHeaderValue("application/json");
-    client.BaseAddress = new Uri(endpoint);
-    client.DefaultRequestHeaders.Accept.Add(contentType);
-    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", key);
-
-    var data = new
-    {
-        url = $"https://github.com/MicrosoftLearning/mslearn-ai-vision/blob/main/Labfiles/01-analyze-images/Python/image-analysis/{imageFile}?raw=true"
-    };
-
-    var jsonData = JsonSerializer.Serialize(data);
-    var contentData = new StringContent(jsonData, Encoding.UTF8, contentType);
-    var response = await client.PostAsync(url, contentData);
-
-    if (response.IsSuccessStatusCode) {
-        File.WriteAllBytes("background.png", response.Content.ReadAsByteArrayAsync().Result);
-        Console.WriteLine("  Results saved in background.png\n");
-    }
-    else
-    {
-        Console.WriteLine($"API error: {response.ReasonPhrase} - Check your body url, key, and endpoint.");
-    }
-}
-```
-
-**Python**
-
-```Python
-# Remove the background from the image or generate a foreground matte
-print('\nRemoving background from image...')
-    
-url = "{}computervision/imageanalysis:segment?api-version={}&mode={}".format(endpoint, api_version, mode)
-
-headers= {
-    "Ocp-Apim-Subscription-Key": key, 
-    "Content-Type": "application/json" 
-}
-
-image_url="https://github.com/MicrosoftLearning/mslearn-ai-vision/blob/main/Labfiles/01-analyze-images/Python/image-analysis/{}?raw=true".format(image_file)  
-
-body = {
-    "url": image_url,
-}
-    
-response = requests.post(url, headers=headers, json=body)
-
-image=response.content
-with open("background.png", "wb") as file:
-    file.write(image)
-print('  Results saved in background.png \n')
-```
-    
-2. Guarde los cambios y ejecute el programa una vez para cada uno de los archivos de imagen de la carpeta **images** y abra el archivo **background.png** que se genera en la misma carpeta que el archivo de código para cada imagen.  Observe cómo se ha eliminado el fondo de cada una de las imágenes.
-
-Ahora vamos a generar un mate en primer plano para nuestras imágenes.
-
-3. En el archivo de código, busque la función **BackgroundForeground** y, en el comentario **Definir la versión y el modo** de la API, cambie la variable de modo a `foregroundMatting`.
-
-4. Guarde los cambios y ejecute el programa una vez para cada uno de los archivos de imagen de la carpeta **images** y abra el archivo **background.png** que se genera en la misma carpeta que el archivo de código para cada imagen.  Observe cómo se ha generado un mate en primer plano para las imágenes.
 
 ## Limpieza de recursos
 
