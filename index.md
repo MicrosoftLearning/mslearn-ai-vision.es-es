@@ -11,5 +11,5 @@ Los siguientes ejercicios están diseñados como apoyo para los módulos de Micr
 
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions/Exercises'" %}
 
-{% for activity in labs  %} 
+{% for activity in labs  %} {% if activity.url contains 'ai-foundry' %} {% continue %} {% endif %}
   - [{{ activity.lab.title }}]({{ site.github.url }}{{ activity.url }}) {% endfor %}
