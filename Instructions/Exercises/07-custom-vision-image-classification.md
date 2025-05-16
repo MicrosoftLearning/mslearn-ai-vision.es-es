@@ -14,7 +14,7 @@ En este ejercicio, usará el servicio Custom Vision para entrenar un modelo de c
 Si aún no ha clonado el repositorio del código**mslearn-ai-vision** en el entorno en el que está trabajando en este laboratorio, siga estos pasos para hacerlo. De lo contrario, abra la carpeta clonada en Visual Studio Code.
 
 1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
+2. Abre la paleta (Mayús + Ctrl + P) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -46,7 +46,7 @@ En este ejercicio, creará recursos de **Custom Vision** para entrenamiento y pr
 
 Para entrenar un modelo de clasificación de imágenes, debe crear un proyecto de Custom Vision basado en su recurso de entrenamiento. Para hacerlo, debe usar el portal de Custom Vision.
 
-1. En Visual Studio Code, consulta las imágenes de entrenamiento en la carpeta **LabFiles/07-custom-vision-image-classification/training-images** donde has clonado el repositorio. Esta carpeta contiene subcarpetas de imágenes de manzana, plátano y naranja.
+1. En Visual Studio Code, visualiza las imágenes de entrenamiento en la carpeta **Labfiles/07-custom-vision-image-classification/training-images** donde has clonado el repositorio. Esta carpeta contiene subcarpetas de imágenes de manzana, plátano y naranja.
 2. En una nueva pestaña del explorador, abra el portal de Custom Vision en `https://customvision.ai`. Si se le solicita, inicie sesión con la cuenta de Microsoft asociada a su suscripción de Azure y acepte las Condiciones del servicio
 3. En el portal de Custom Vision, cree un nuevo proyecto con la siguiente configuración:
     - **Nombre**: clasificar fruta
@@ -55,7 +55,7 @@ Para entrenar un modelo de clasificación de imágenes, debe crear un proyecto d
     - **Tipos de proyecto**: Clasificación
     - **Tipos de clasificación**: multiclase (etiqueta única por imagen)
     - **Dominios**: comida
-4. En el nuevo proyecto, haga clic en **\[+\] Agregar imágenes**, y seleccione todos los archivos de la carpeta **LabFiles/07-custom-vision-image-classification/training-images/apple** que ha visto anteriormente. Después, cargue los archivos de imágenes e incluya la etiqueta *apple*, como en este ejemplo:
+4. En el nuevo proyecto, haz clic en **\[+\] Add images**, y selecciona todos los archivos de la carpeta **Labfiles/07-custom-vision-image-classification/training-images/apple** que has visto anteriormente. Después, cargue los archivos de imágenes e incluya la etiqueta *apple*, como en este ejemplo:
 
 ![Cargar la manzana con la etiqueta apple](../media/upload_apples.jpg)
    
