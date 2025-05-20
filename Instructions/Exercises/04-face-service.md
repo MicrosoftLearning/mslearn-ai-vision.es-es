@@ -17,7 +17,7 @@ La capacidad de detectar y analizar caras de personas es una funcionalidad bási
 Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 
 1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
+2. Abre la paleta (Mayús + Ctrl + P) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -44,7 +44,7 @@ En este ejercicio, completará una aplicación cliente parcialmente implementada
 
 > **Nota**: Puede elegir usar el SDK para **C#** o **Python**. En los pasos siguientes, realice las acciones adecuadas para su lenguaje preferido.
 
-1. En Visual Studio Code, en el panel **Explorador**, navega hasta la carpeta **04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
+1. En Visual Studio Code, en el panel **Explorer**, navega hasta la carpeta **Labfiles/04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
 2. Haga clic con el botón derecho en la carpeta **computer-vision** y abra un terminal integrado. A continuación, instale el paquete del SDK de Visión de Azure AI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#**
@@ -203,7 +203,7 @@ Si quieres ver la puntuación de confianza de todas las personas detectadas por 
 
 Aunque el servicio **Visión de Azure AI** ofrece detección de caras básica (junto con muchas otras capacidades de análisis de imágenes), el servicio **Face** proporciona una funcionalidad más completa de reconocimiento y análisis facial.
 
-1. En Visual Studio Code, en el panel **Explorador**, navega hasta la carpeta **04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
+1. En Visual Studio Code, en el panel **Explorer**, navega hasta la carpeta **Labfiles/04-face** y expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
 2. Haga clic con el botón derecho en la carpeta **face-api** y abra un terminal integrado. A continuación, instale el paquete del SDK de Face mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#**
