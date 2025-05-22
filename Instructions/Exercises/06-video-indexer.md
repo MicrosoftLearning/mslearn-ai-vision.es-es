@@ -15,7 +15,7 @@ Una gran proporción de los datos creados y consumidos hoy en día tiene el form
 Si ha clonado recientemente el repositorio del código **mslearn-ai-vision** en el entorno en el que está trabajando en este laboratorio, ábralo en Visual Studio Code; en caso contrario, siga estos pasos para clonarlo ahora.
 
 1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
+2. Abre la paleta (Mayús + Ctrl + P) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -82,7 +82,7 @@ Puede usar Video Indexer para buscar información en el vídeo.
 
 El portal de Video Indexer es una interfaz útil para administrar proyectos de indexación de vídeo. Sin embargo, puede haber ocasiones en las que quiera que el vídeo y su información estén disponibles para las personas que no tienen acceso a su cuenta de Video Indexer. Video Indexer proporciona widgets que puede insertar en una página web para este propósito.
 
-1. En Visual Studio Code, en la carpeta **06-video-indexer**, abra **analyze-video.html**. Se trata de una página HTML básica en la que agregará los widgets de **Reproductor** e **Información** de Video Indexer. Fíjese en la referencia al script **vb.widgets.mediator.js** en el encabezado: este script permite que varios widgets de Video Indexer de la página interactúen entre sí.
+1. En Visual Studio Code, en la carpeta **Labfiles/06-video-indexer**, abre **analyze-video.html**. Se trata de una página HTML básica en la que agregará los widgets de **Reproductor** e **Información** de Video Indexer. Fíjese en la referencia al script **vb.widgets.mediator.js** en el encabezado: este script permite que varios widgets de Video Indexer de la página interactúen entre sí.
 2. En el portal de Video Indexer, vuelva a la página **Archivos multimedia** y abra el vídeo **IA responsable**.
 3. En el reproductor de vídeo, seleccione **&lt;/&gt; Insertar** para ver el código iframe HTML para insertar los widgets.
 4. En el cuadro de diálogo **Compartir e insertar**, seleccione el widget **Reproductor**, establezca el tamaño del vídeo en 560 x 315 y, a continuación, copie el código para insertar en el portapapeles.
@@ -117,7 +117,7 @@ Todas las interacciones con la API de REST de Video Indexer siguen el mismo patr
 - Se usa una solicitud inicial al método **AccessToken** con la clave de API en el encabezado para obtener un token de acceso.
 - Las solicitudes posteriores usan el token de acceso para autenticarse al llamar a métodos REST para trabajar con vídeos.
 
-1. En Visual Studio Code, en la carpeta **06-video-indexer**, abra **get-videos.ps1**.
+1. En Visual Studio Code, en la carpeta **Labfiles/06-video-indexer**, abre **get-videos.ps1**.
 2. En el script de PowerShell, reemplace los marcadores de posición **YOUR_ACCOUNT_ID** y **YOUR_API_KEY** por los valores de identificador de cuenta y clave de API que identificó anteriormente.
 3. Observe que la *ubicación* de una cuenta gratuita es "trial". Si ha creado una cuenta de Video Indexer sin restricciones (con un recurso de Azure asociado), puede cambiarla a la ubicación donde se aprovisiona el recurso de Azure (por ejemplo, "eastus").
 4. Revise el código del script, y tenga en cuenta que invoca dos métodos REST: uno para obtener un token de acceso y otro para enumerar los vídeos de su cuenta.

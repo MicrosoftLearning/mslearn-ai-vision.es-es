@@ -12,7 +12,7 @@ En este ejercicio, usará el servicio Custom Vision para entrenar un modelo de *
 Si ya ha clonado el repositorio del código **mslearn-ai-vision** en el entorno en el que está trabajando en este laboratorio, ábralo en Visual Studio Code; en caso contrario, siga estos pasos para clonarlo ahora.
 
 1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
+2. Abre la paleta (Mayús + Ctrl + P) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-ai-vision` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -57,7 +57,7 @@ Para entrenar un modelo de detección de objetos, debe crear un proyecto de Cust
 
 Para entrenar un modelo de detección de objetos, debe cargar imágenes que contengan las clases con las que desea que se identifique el modelo y etiquetarlas para indicar cuadros de límite para cada instancia de objeto.
 
-1. En Visual Studio Code, consulte las imágenes de entrenamiento en la carpeta **03-object-detection/training-images** donde clonó el repositorio. Esta carpeta contiene imágenes de fruta.
+1. En Visual Studio Code, visualiza las imágenes de entrenamiento en la carpeta **Labfiles/03-object-detection/training-images** donde clonaste el repositorio. Esta carpeta contiene imágenes de fruta.
 2. En el portal de Custom Vision, en el proyecto de detección de objetos, seleccione **Add images** y cargue todas las imágenes de la carpeta extraída.
 3. Una vez cargadas las imágenes, seleccione la primera para abrirla.
 4. Mantenga presionado el mouse sobre cualquier objeto de la imagen hasta que se muestre una región detectada automáticamente como la imagen siguiente. A continuación, seleccione el objeto y, si es necesario, cambie el tamaño de la región para rodearlo.
@@ -89,7 +89,7 @@ Puedes usar la interfaz de usuario en el portal de Custom Vision para etiquetar 
 1. Haga clic en el icono de *configuración* (&#9881;) situado en la parte superior derecha de la página **Imágenes de entrenamiento** del portal de Custom Vision para ver la configuración del proyecto.
 2. En **General** (a la izquierda), fíjese en el **Id. de proyecto** que identifica de forma única este proyecto.
 3. A la derecha, en **Recursos**, observe que se muestran la clave y el punto de conexión. Estos son los detalles del recurso de *entrenamiento*. También puede obtener esta información viendo el recurso en Azure Portal.
-4. En Visual Studio Code, en la carpeta **03-object-detection**, expanda la carpeta **C-Sharp** o **Python** según sus preferencias de lenguaje.
+4. En Visual Studio Code, en la carpeta **Labfiles/03-object-detection**, expande la carpeta **C-Sharp** o **Python** según tus preferencias de lenguaje.
 5. Haga clic con el botón derecho en la carpeta **train-detector** y abra un terminal integrado. A continuación, instale el paquete de entrenamiento de Custom Vision mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
 **C#**
@@ -145,7 +145,7 @@ pip install azure-cognitiveservices-vision-customvision==3.1.1
 
 ## Entrenar y probar un modelo
 
-Ahora que ha etiquetado las imágenes del proyecto, está listo para entrenar un modelo. por
+Ahora que ha etiquetado las imágenes del proyecto, está listo para entrenar un modelo. Usted
 
 1. En el proyecto de Custom Vision, haga clic en **Entrenar** para entrenar un modelo de detección de objetos mediante las imágenes etiquetadas. Seleccione la opción **Quick Training**.
 2. Espere a que se complete el entrenamiento (puede tardar alrededor de 10 minutos) y compruebe las métricas de rendimiento *Precision*, *Recall* y *mAP* (miden la precisión de la predicción del modelo de clasificación y sus valores deberían ser altos).
@@ -165,7 +165,7 @@ Ya puede publicar su modelo entrenado para poder usarlo desde una aplicación cl
 
 Ahora que ha publicado el modelo de clasificación de imágenes, puede usarlo desde una aplicación cliente. Una vez más, puede optar por usar **C#** o **Python**.
 
-1. En Visual Studio Code, vaya a la carpeta **03-object-detection** y, en la carpeta de su lenguaje preferido (**C-Sharp** o **Python**), expanda la carpeta **test-detector**.
+1. En Visual Studio Code, ve a la carpeta **Labfiles/03-object-detection** y, en la carpeta de tu lenguaje preferido (**C-Sharp** o **Python**), expande la carpeta **test-detector**.
 2. Haga clic con el botón derecho en la carpeta **test-detector** y abra un terminal integrado. A continuación, escriba el siguiente comando específico del SDK para instalar el paquete de predicción de Custom Vision:
 
 **C#**
