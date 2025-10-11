@@ -34,9 +34,9 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
 > **Nota**: los proyectos de Fundición de IA se pueden basar en un recurso de *Fundición de IA de Azure*, que proporciona acceso a modelos de IA (incluido Azure OpenAI), Servicios de Azure AI y otros recursos para desarrollar agentes de IA y soluciones de chat. Como alternativa, los proyectos se pueden basar en los recursos del *Centro de IA*, que incluyen conexiones a los recursos de Azure para proteger el almacenamiento, el proceso y las herramientas especializadas. Los proyectos basados en Fundición de IA de Azure son ideales para los desarrolladores que desean administrar recursos para el desarrollo de aplicaciones de chat o agentes de IA. Los proyectos basados en el Centro de IA son más adecuados para los equipos de desarrollo empresarial que trabajan en soluciones de IA complejas.
 
-1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `Phi-4-multimodal-instruct`, que usaremos en nuestro proyecto.
+1. En la página principal, en la sección **Explorar modelos y funcionalidades**, busca el modelo `gpt-4o`, que usaremos en nuestro proyecto.
 
-1. En los resultados de la búsqueda, seleccione el modelo **Phi-4-multimodal-instruct** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, seleccione **Usar este modelo**.
+1. En los resultados de la búsqueda, selecciona el modelo **gpt-4o** para ver sus detalles y, a continuación, en la parte superior de la página del modelo, selecciona **Usar este modelo**.
 
 1. Cuando se te pida que crees un proyecto, escribe un nombre válido para el proyecto y expande **Opciones avanzadas**.
 
@@ -48,9 +48,9 @@ Un *proyecto* de Azure AI proporciona un área de trabajo de colaboración para 
 
     > \* Algunos de los recursos de Azure AI están restringidos por cuotas de modelo regionales. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Seleccione **Crear** y espere a que se cree el proyecto, incluida la implementación del modelo Phi-4-multimodal-instruct que ha seleccionado.
+1. Seleccione **Crear** y espere a que se cree el proyecto, incluida la implementación del modelo gpt-4o que ha seleccionado.
 
-    > Nota: Dependiendo de la selección del modelo, podría recibir mensajes adicionales durante el proceso de creación del proyecto. Acepte los términos y finalice la implementación.
+    > <font color="red"><b>IMPORTANTE</b>:</font> En función de la cuota disponible para los modelos gpt-4o, es posible que reciba un aviso adicional para implementar el modelo en un recurso de otra región. Si esto sucede, hágalo con la configuración predeterminada. Más adelante en el ejercicio <b><u>no</u></b> podrá usar el punto de conexión de proyecto predeterminado; tendrá que usar el URI de destino específico del modelo.
 
 1. Cuando se cree el proyecto, el modelo se mostrará en la página **Modelos y puntos de conexión**:
 
@@ -64,7 +64,7 @@ Ahora puede probar la implementación de modelos multimodales con una indicació
 
 1. En una nueva pestaña del explorador, descarga [mango.jpeg](https://github.com/MicrosoftLearning/mslearn-ai-vision/raw/refs/heads/main/Labfiles/gen-ai-vision/mango.jpeg) desde `https://github.com/MicrosoftLearning/mslearn-ai-vision/raw/refs/heads/main/Labfiles/gen-ai-vision/mango.jpeg` y guárdala en una carpeta del sistema de archivos local.
 
-1. En la página de área de juegos de chat, en el panel **Configuración**, asegúrate de que la implementación de modelo **Phi-4-multimodal-instruct** esté seleccionada.
+1. En la página de área de juegos de chat, en el panel **Configuración**, asegúrese de que la implementación del modelo **gpt-4o** esté seleccionada.
 
 1. En el panel de sesión del chat principal, en el cuadro de entrada del chat, usa el botón adjuntar (**&#128206;**) para cargar el archivo de imagen *mango.jpeg* y, a continuación, agrega el texto `What desserts could I make with this fruit?` y envía la indicación.
 
@@ -78,10 +78,6 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
 ### Preparación de la configuración de aplicación
 
-1. En el Portal de la Fundición de IA de Azure, mira la página **Información general** del proyecto.
-
-1. En el área **Puntos de conexión y claves**, asegúrese de que está seleccionada la biblioteca de **Fundición de IA de Azure** y anote el **punto de conexión del proyecto de Fundición de IA de Azure**. Usarás esta cadena de conexión para conectarte al proyecto en una aplicación cliente.
-
 1. Abre una nueva pestaña del explorador (mantén el Portal de la Fundición de IA de Azure abierto en la pestaña existente). En la nueva pestaña, explora [Azure Portal](https://portal.azure.com) en `https://portal.azure.com` e inicia sesión con tus credenciales de Azure, si se te solicita.
 
     Cierra las notificaciones de bienvenida para ver la página principal de Azure Portal.
@@ -91,8 +87,6 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
     Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal. Puedes cambiar el tamaño o maximizar este panel para facilitar el trabajo.
 
     > **Nota**: si has creado anteriormente una instancia de Cloud Shell que usa un entorno de *Bash*, cámbiala a ***PowerShell***.
-
-    > **Nota**: Si el portal le pide que seleccione un almacenamiento para conservar los archivos, elija **No se requiere una cuenta de almacenamiento**, seleccione la suscripción que usa y presione **Aplicar**.
 
 1. En la barra de herramientas de Cloud Shell, en el menú **Configuración**, selecciona **Ir a la versión clásica** (esto es necesario para usar el editor de código).
 
@@ -129,7 +123,9 @@ Ahora que has implementado el modelo, puedes usar la implementación en una apli
 
     El archivo se abre en un editor de código.
 
-1. En el archivo de código, reemplace el marcador de posición **your_project_endpoint** por el punto de conexión del proyecto de Fundición (copiado de la página **Información general** del proyecto en el portal de Fundición de IA de Azure) y el marcador de posición **your_model_deployment** por el nombre que asignó a la implementación del modelo Phi-4-multimodal-instruct.
+    > <font color="red"><b>IMPORTANTE</b>:</font> Si ha implementado el modelo gpt-4o en la región predeterminada del proyecto, puede usar el <b>proyecto Fundición de IA de Azure</b> o el punto de conexión de <b>Azure OpenAI</b> en la página <b>Información general</b> del proyecto para conectarse al modelo. Si no tenía cuota suficiente y ha implementado el modelo en otra región, en la página <b>Modelos y puntos de conexión</b>, seleccione el modelo y use el <b>URI de destino</b> del modelo.
+
+1. En el archivo de código, reemplace el marcador de posición **your_project_endpoint** por el punto de conexión adecuado del modelo y el marcador de posición **your_model_deployment** por el nombre que haya asignado a la implementación del modelo gpt-4o.
 
 1. Después de reemplazar los marcadores de posición, en el editor de código, usa el comando **CTRL+S** o usa la acción de **hacer clic con el botón derecho > Guardar** para guardar los cambios y, a continuación, usa el comando **CTRL+Q** o la acción de **hacer clic con el botón derecho > Salir** para cerrar el editor de código mientras mantienes abierta la línea de comandos de Cloud Shell.
 
